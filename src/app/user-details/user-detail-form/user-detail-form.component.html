@@ -1,0 +1,103 @@
+
+<form novalidate autocomplete="off"  #form="ngForm" (submit)="onSubmit(form)">
+    <div class="row">
+
+    <input type="hidden" name="userDetailId"
+    [value]="service.formData.userDetailId"/>
+    <div class=col-md-6>
+    <div class="form-group">
+        <label>FIRST NAME</label>
+        <input class="form-control form-control-lg" placeholder="first name(Atleast 3 letters)"
+        name="userFirstName" #userFirstName="ngModel" [(ngModel)]="service.formData.userFirstName"
+        required pattern="[(a-z)|(A-Z)]{3,40}"
+        maxlength="40" [class.invalid]="userFirstName.invalid && userFirstName.touched">
+    </div><br>
+
+    <div class="form-group">
+        <label>LAST NAME</label>
+        <input class="form-control form-control-lg" placeholder="last name"
+        name="userLastName" #userLastName="ngModel" [(ngModel)]="service.formData.userLastName"
+        required  pattern="[(a-z)|(A-Z)]{1,40}" maxlength="40" 
+        [class.invalid]="userLastName.invalid && userLastName.touched">
+    </div><br>
+
+    <div class="form-group">
+        <label>EMAIL</label>
+        <input type="email" class="form-control form-control-lg" placeholder="example@gmail.com"
+        name="userEmail" #userEmail="ngModel" [(ngModel)]="service.formData.userEmail"
+        required pattern="[[a-z]|[0-9]|[A-Z]][[[a-z]|[0-9]|[A-Z]]*@gmail.com]"
+        maxlength="100" [class.invalid]="userEmail.invalid && userEmail.touched">
+    </div><br>
+
+    <div class="form-group">
+        <label>PHONE NUMBER</label>
+        <input class="form-control form-control-lg" placeholder="10-digit phonenumber"
+        name="userPhone" #userPhone="ngModel" [(ngModel)]="service.formData.userPhone"
+        required  pattern="[0-9]{10}" minlength="10" maxlength="10"
+        [class.invalid]="userPhone.invalid && userPhone.touched">
+    </div><br>
+
+   <div class="row"> 
+       <div class="col-md-6">
+      <div class="form-group">
+        <label>GENDER</label>
+        <select  name="userGender" class="form-control form-control-lg"
+         #userGender="ngModel" [(ngModel)]="service.formData.userGender"
+        required [class.invalid]="userGender.invalid && userGender.touched">
+        <option >Male</option>
+        <option>Female</option>
+        <option>Others</option>
+        </select>   
+    </div>
+</div>
+
+
+<div class="col-md-6">
+    <div class="form-group">
+
+        <label>ACTIVE</label>
+        <br>
+        <label>
+            <input  type="radio" value="Yes" 
+            name="userActive" #userActive="ngModel" [(ngModel)]="service.formData.userActive"
+            required [class.invalid]="userActive.invalid && userActive.touched">
+            <span class=" form-control-lg">yes</span>
+        </label>
+
+        <label>
+            <input  type="radio" value="No" 
+            name="userActive" #userActive="ngModel" [(ngModel)]="service.formData.userActive"
+            required [class.invalid]="userActive.invalid && userActive.touched">
+            <span class=" form-control-lg">no</span>
+        </label>
+        
+    </div>
+    </div>
+</div>
+
+</div>
+
+<div class="col-md-6">
+    <div class="form-group">
+        <label>ADDRESS</label>
+        <textarea rows="10"  class="form-control form-control-lg" 
+           placeholder="enter your address"
+           name="userAddress" #userAddress="ngModel" [(ngModel)]="service.formData.userAddress"
+            required maxlength="250" [class.invalid]="userAddress.invalid && userAddress.touched">   
+         </textarea>
+   
+   </div>
+   <br><br>
+   <div class="form-group" >
+    <button class="btn btn-info btn-lg btn-block" type="submit" 
+    [disabled]="form.invalid">
+        SUBMIT</button>
+</div>
+
+   
+</div>
+
+</div>
+
+</form>
+

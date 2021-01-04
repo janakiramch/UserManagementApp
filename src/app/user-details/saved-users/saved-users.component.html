@@ -1,0 +1,165 @@
+
+<h2>List of Users</h2>
+<div >
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th><b style="color:crimson;">First Name</b></th>
+                <th><b style="color:crimson;">Last Name</b></th>
+                <th><b style="color:crimson;">Email</b></th>
+                <th><b style="color:crimson;">Phone Number</b></th>
+                <th><b style="color:crimson;">Address</b></th>
+                <th><b style="color:crimson;">Gender</b></th>
+                <th><b style="color:crimson;">Active</b></th>
+                <th><b style="color:crimson">Options</b></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ud of service.list">
+                <td >{{ud.userFirstName}}</td>
+                <td >{{ud.userLastName}}</td>
+                <td >{{ud.userEmail}}</td>
+                <td >{{ud.userPhone}}</td>
+                <td >{{ud.userAddress}}</td>
+                <td >{{ud.userGender}}</td>
+                <td >{{ud.userActive}}</td>
+                <td><i class="fas fa-edit"  (click)="showModal=true" (click)="populateForm(ud)"
+                    data-toggle="modal" data-target="#editModal"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="far fa-trash-alt fa-lg text-danger"
+                    (click)="onDelete(ud.userDetailId)"></i>
+                </td>
+                <td>
+                    
+                </td>  
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+ 
+ <div id="editModal" class="modal fade " role="dialog" [ngClass]="{'show':showModal}">
+   <div class="modal-dialog modal-lg">
+ 
+     
+     <div class="modal-content">
+       <div class="modal-header">
+         <h3 style="text-align: center;" class="modal-title">Edit Your Details</h3>  
+       </div>
+       <div class="modal-body">
+       
+       
+<form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+  <div class="row">
+
+  <input type="hidden" name="userDetailId"
+  [value]="service.formData.userDetailId"/>
+  <div class=col-md-6>
+  <div class="form-group">
+      <label>FIRST NAME</label>
+      <input class="form-control form-control-lg" placeholder="first name(Atleast 3 letters)"
+      name="userFirstName" #userFirstName="ngModel" [(ngModel)]="service.formData.userFirstName"
+      required pattern="[a-z]{3,40}"
+      maxlength="40" [class.invalid]="userFirstName.invalid && userFirstName.touched">
+  </div><br>
+
+  <div class="form-group">
+      <label>LAST NAME</label>
+      <input class="form-control form-control-lg" placeholder="last name"
+      name="userLastName" #userLastName="ngModel" [(ngModel)]="service.formData.userLastName"
+      required  pattern="[a-z]{1,40}" maxlength="40" 
+      [class.invalid]="userLastName.invalid && userLastName.touched">
+  </div><br>
+
+  <div class="form-group">
+      <label>EMAIL</label>
+      <input  class="form-control form-control-lg" placeholder="example@gmail.com"
+      name="userEmail" #userEmail="ngModel" [(ngModel)]="service.formData.userEmail"
+      required pattern="[[a-z]|[0-9]][[a-z]|[0-9]]*@gmail.com"
+      maxlength="100" [class.invalid]="userEmail.invalid && userEmail.touched">
+  </div><br>
+
+  <div class="form-group">
+      <label>PHONE NUMBER</label>
+      <input class="form-control form-control-lg" placeholder="10-digit phonenumber"
+      name="userPhone" #userPhone="ngModel" [(ngModel)]="service.formData.userPhone"
+      required  pattern="[0-9]{10}" minlength="10" maxlength="10"
+      [class.invalid]="userPhone.invalid && userPhone.touched">
+  </div><br>
+
+ <div class="row"> 
+     <div class="col-md-6">
+    <div class="form-group">
+      <label>GENDER</label>
+      <select  name="userGender" class="form-control form-control-lg"
+       #userGender="ngModel" [(ngModel)]="service.formData.userGender"
+      required [class.invalid]="userGender.invalid && userGender.touched">
+      <option >Male</option>
+      <option>Female</option>
+      <option>Others</option>
+      </select>   
+  </div>
+</div>
+
+
+<div class="col-md-6">
+  <div class="form-group">
+
+      <label>ACTIVE</label>
+      <br>
+      <label>
+          <input  type="radio" value="Yes" 
+          name="userActive" #userActive="ngModel" [(ngModel)]="service.formData.userActive"
+          required [class.invalid]="userActive.invalid && userActive.touched">
+          <span class=" form-control-lg">yes</span>
+      </label>
+
+      <label>
+          <input  type="radio" value="No" 
+          name="userActive" #userActive="ngModel" [(ngModel)]="service.formData.userActive"
+          required [class.invalid]="userActive.invalid && userActive.touched">
+          <span class=" form-control-lg">no</span>
+      </label>
+      
+  </div>
+  </div>
+</div>
+
+</div>
+
+<div class="col-md-6">
+  <div class="form-group">
+      <label>ADDRESS</label>
+      <textarea rows="10"  class="form-control form-control-lg" 
+         placeholder="enter your address"
+         name="userAddress" #userAddress="ngModel" [(ngModel)]="service.formData.userAddress"
+          required maxlength="250" [class.invalid]="userAddress.invalid && userAddress.touched">   
+       </textarea>
+ 
+ </div>
+ <br><br>
+ <div class="form-group" >
+  <button class="btn btn-success btn-lg btn-block" type="submit" 
+  [disabled]="form.invalid" >SAVE</button>
+</div>
+
+ 
+</div>
+
+</div>
+
+</form>
+
+
+
+       </div>
+       <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" (click)="showModal=false" 
+         data-dismiss="modal">Cancel</button>
+       </div>
+       
+     </div>
+ 
+   </div>
+ </div>
+ 
