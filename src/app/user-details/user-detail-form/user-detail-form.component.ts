@@ -12,7 +12,6 @@ import { ToastrService } from "ngx-toastr";
 })
 export class UserDetailFormComponent implements OnInit {
   
-
   constructor(public service: UserDetailService,
     private toastr:ToastrService) { }
     public showModal:boolean;
@@ -22,13 +21,8 @@ export class UserDetailFormComponent implements OnInit {
 
   onSubmit(form:NgForm){
     if(this.service.formData.userDetailId==0)
-  
     this.insertRecord(form);
-    this.showModal=false;
-  
-  
-    /*else
-    this.updateRecord(form); */        
+    this.showModal=false;        
   }
 
   insertRecord(form : NgForm){
@@ -36,23 +30,12 @@ export class UserDetailFormComponent implements OnInit {
       res =>{
            this.resetForm(form);
            this.service.refreshlist();
-           this.toastr.success('Submitted Successfully','User Detail Register')
-           
+           this.toastr.success('Submitted Successfully','User Detail Register')    
       },
-      err => {console.log(err);} 
+      err => {console.log(err);
+        this.toastr.error("Sorry, server returns following error: " + err.statusText,"ERROR:" + err.status);} 
     );
   }
-
- /* updateRecord(form:NgForm){
-    this.service.putUserDetail().subscribe(
-      res =>{
-           this.resetForm(form);
-           this.service.refreshlist();
-           this.toastr.info('Updated Successfully','User Detail Register')
-      },
-      err => {console.log(err);} 
-    );
-  }*/
 
   resetForm(form:NgForm){
     form.form.reset();

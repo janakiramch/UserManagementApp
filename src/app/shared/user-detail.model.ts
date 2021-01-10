@@ -1,4 +1,5 @@
 export class UserDetail {
+    
    userDetailId: number=0;
    userFirstName: string='';
    userLastName: string='';
@@ -7,6 +8,5 @@ export class UserDetail {
    userAddress: string='';
    userGender: string='';
    userActive : string='';
-
-
+   
 }

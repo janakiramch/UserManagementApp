@@ -4,10 +4,17 @@
 
   .form-group label {
     color: grey;
+    
+  }
+
+  .addbackground{
+    background-image: url('src\assets\background.jpg');
+
   }
 
   .jumbotron{
     background-color: grey;
+    
   }
   
   .form-group input {
@@ -38,3 +45,5 @@
   {
     display:block;
   }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -4,29 +4,22 @@ import { UserDetailService } from 'src/app/shared/user-detail.service';
 import { UserDetail } from "src/app/shared/user-detail.model";
 import { ToastrService } from "ngx-toastr";
 
-
 @Component({
   selector: 'app-user-edit-form',
   templateUrl: './user-edit-form.component.html',
   styles: [
   ]
 })
+
 export class UserEditFormComponent implements OnInit {
 
   public showModal :boolean;
-  
-
   constructor(public service: UserDetailService,
     private toastr:ToastrService) { }
-
-  
-    
 
   ngOnInit(): void {
   }
   
-
-
   onSubmit(form:NgForm){
     if(this.service.formData.userDetailId==0)
     this.insertRecord(form);
@@ -39,14 +32,12 @@ export class UserEditFormComponent implements OnInit {
       res =>{
            this.resetForm(form);
            this.service.refreshlist();
-           this.toastr.success('Submitted Successfully','User Management')
-           
+           this.toastr.success('Submitted Successfully','User Management')     
       },
-      err => {console.log(err);} 
+      err => {console.log(err);
+        this.toastr.error("Sorry, server returns following error: " + err.statusText,"ERROR:" + err.status);} 
     );
   }
-
-  
 
   updateRecord(form:NgForm){
     this.service.putUserDetail().subscribe(
@@ -55,7 +46,8 @@ export class UserEditFormComponent implements OnInit {
            this.service.refreshlist();
            this.toastr.info('Updated Successfully','User Management')
       },
-      err => {console.log(err);} 
+      err => {console.log(err);
+        this.toastr.error("Sorry, server returns following error: " + err.statusText,"ERROR:" + err.status);} 
     );
   }
 
@@ -63,6 +55,5 @@ export class UserEditFormComponent implements OnInit {
     form.form.reset();
     this.service.formData= new UserDetail();
   }
-
 
 }
